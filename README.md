@@ -38,4 +38,23 @@ proceed with the installation and pay attention to the output, if aptitude can't
 
 ## Step 3: Disable Dynamic Display Switch
 
+After installing the drivers restart the computer, and access the BIOS by quickly pressing F1 right after booting. Navigate to the Chipset tab, down to "GPU MODE", and select "Dedicated GPU only".
+
+This is necessary because MinKNOW won't be able to basecall with Dynamic Display Switch active. This also shortens battery life, so, if the computer needs to be active without charging for a long time and won't be used for basecalling (or for other CUDA based machine learning programs), I recommend leaving DDS active.  
+
 ## Step 4: Install MinKNOW
+
+More details for the MinKNOW installation can be found at ONT's website, but you can install it running the following commands line by line:
+
+Install wget, import the security key and ONT's package repository:
+```bash
+sudo apt update
+sudo apt install wget
+wget -O- https://cdn.oxfordnanoportal.com/apt/ont-repo.pub | sudo apt-key add -
+echo "deb http://cdn.oxfordnanoportal.com/apt focal-stable non-free" | sudo tee /etc/apt/sources.list.d/nanoporetech.sources.list
+```
+Install MinKNOW:
+```bash
+sudo apt update
+sudo apt install ont-standalone-minknow-gpu-release
+```
