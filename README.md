@@ -2,7 +2,7 @@
 Configuring the Razer Blade 15 laptop for field DNA sequencing and data analysis:
 ## July 2024 update:
 The Ubuntu installation broke, as Ubuntu installations usually do, so I installed Linux Mint this time, available [here](https://www.linuxmint.com/download_all.php). Mint is derived from Ubuntu but it's more stable, so it should work better on the long term.
-**Important: as of now ONT hasn't made a MinKNOW version for Ubuntu 24, the latest version. Mint's latest versin (22) is based on Ubuntu 24, so MinKNOW is not installable in those versions because of some dumb proprietary ONT packages. So, as of the time of writing, it's necessary to install Mint version 21.3.**
+**Important: as of now ONT hasn't made a MinKNOW version for Ubuntu 24, the latest version. Mint's latest version (22) is based on Ubuntu 24, so MinKNOW is not installable in those versions because of some dumb proprietary ONT packages. So, as of the time of writing, it's necessary to install Mint version 21.3.**
 The rest of the installation instructions are the same since Mint uses the same repositories as Ubuntu. 
 
 ## Step 1: Replace the original operating system with Ubuntu 22.04LTS
