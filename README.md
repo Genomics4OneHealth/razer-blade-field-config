@@ -1,5 +1,9 @@
 # Razer Blade Field Configuration
 Configuring the Razer Blade 15 laptop for field DNA sequencing and data analysis:
+## July 2024 update:
+The Ubuntu installation broke, as Ubuntu installations usually do, so I installed Linux Mint this time, available [here](https://www.linuxmint.com/download_all.php). Mint is derived from Ubuntu but it's more stable, so it should work better on the long term.
+**Important: as of now ONT hasn't made a MinKNOW version for Ubuntu 24, the latest version. Mint's latest versin (22) is based on Ubuntu 24, so MinKNOW is not installable in those versions because of some dumb proprietary ONT packages. So, as of the time of writing, it's necessary to install Mint version 21.3.**
+The rest of the installation instructions are the same since Mint uses the same repositories as Ubuntu. 
 
 ## Step 1: Replace the original operating system with Ubuntu 22.04LTS
 A linux based system is necessary to conduct bioinformatics analysis, and Ubuntu is the only distribution where ONT's MinKNOW is currently supported.
@@ -60,4 +64,22 @@ Install MinKNOW:
 ```bash
 sudo apt update
 sudo apt install ont-standalone-minknow-gpu-release
+```
+## Possible problems:
+
+### Not connecting properly to sequencers:
+If MinKNOW can't connect to the sequencers it will say there are connection problems or will throw a "Unable to find a hardware check script to start" error. This most likely is a permission problem, and can be checked with:
+```bash
+sudo systemctl status minknow.service
+```
+the output should say that libusb "couldn't open USB device" and "requires write access to USB service nodes". If that's the case then the problem can be fixed by editing ```/lib/systemd/system/minknow.service``` and changing the "group" and "user" fields from "minknow" to "root".
+Afterwards it's necesary to either reboot or reload the daemon and restart the minknow service:
+```bash
+sudo systemctl daemon-reload && sudo systemctl restart minknow.service
+```
+
+### System not detecting WiFi card
+This is a rare problem but, since we must use an older OS version, there is the possibility the the system won't detect the Intel wireless card that ships with the laptop. Usually this can be solved by explicitly installing the HWE drivers:
+```bash
+sudo aptitude update && sudo aptitude install linux-generic-hwe-22.04
 ```
